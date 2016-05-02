@@ -8,9 +8,9 @@ import java.util.HashMap;
  */
 public class MessageCounter implements MessageSystem {
 
-    private HashMap<String,ArrayList<Integer>> data;
+    private HashMap<String,float[]> data;
 
-    public MessageCounter(HashMap<String,ArrayList<Integer>> data) {
+    public MessageCounter(HashMap<String,float[]> data) {
         this.data = data;
     }
 
@@ -20,7 +20,7 @@ public class MessageCounter implements MessageSystem {
     }
 
     @Override
-    public  HashMap<String,ArrayList<Integer>> getMessage() {
+    public  HashMap<String,float[]> getMessage() {
         return data;
     }
 }

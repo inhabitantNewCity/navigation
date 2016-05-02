@@ -1,6 +1,11 @@
 package com.example.vlad.navigation;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +19,7 @@ import com.example.vlad.navigation.grafics.defineLocationSystems.dialogSystem.Di
 import com.example.vlad.navigation.grafics.defineLocationSystems.pointOnMapSystem.PointOnMapActivity;
 
 public class MainActivity extends AppCompatActivity {
-
+    BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        ;
     }
 
     @Override
@@ -55,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onClickMap(View view){
         Intent intent = new Intent(this, PointOnMapActivity.class);
+        //BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+        //btAdapter.enable();
         startActivity(intent);
     }
     public void onClickDialog(View view){

@@ -19,8 +19,8 @@ public class CounterAlphaBetta implements Counter {
     private static ConcurrentLinkedQueue<MessageSystem> myQueue = new ConcurrentLinkedQueue();
     private static ConcurrentLinkedQueue<MessageSystem> queueGraf;
 
-    private double[] acc = new double[3];
-    private double[] accAngle = new double[3];
+    private float[] acc = new float[3];
+    private float[] accAngle = new float[3];
 
     private double[] S = new double[3];
     private double[] Vo = new double[3];
@@ -43,7 +43,7 @@ public class CounterAlphaBetta implements Counter {
         while(true){
             if(!myQueue.isEmpty()){
                 MessageCounter ms = (MessageCounter)myQueue.poll();
-                HashMap<String,ArrayList<Integer>> map = ms.getMessage();
+                HashMap<String,float[]> map = ms.getMessage();
                 parse(map);
                 lengthStep();
                 sendMessage();
@@ -64,14 +64,8 @@ public class CounterAlphaBetta implements Counter {
         queueGraf.add(ms);
     }
 
-    private void parse(HashMap<String, ArrayList<Integer>> map) {
-        ArrayList<Integer> accInput = map.get("A");
-        ArrayList<Integer> accAngleInput = map.get("G");
-        //TODO: parse 3 angles
-        for(int i = 0; i < acc.length; i++){
-            acc[i] = accInput.get(i);
-            accAngle[i] = accAngleInput.get(i);
-        }
+    private void parse(HashMap<String, float[]> map) {
+        acc =  map.get("A");
     }
 
     private void lengthStep() {

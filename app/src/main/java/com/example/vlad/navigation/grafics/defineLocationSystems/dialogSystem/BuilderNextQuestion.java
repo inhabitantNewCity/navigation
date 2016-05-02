@@ -93,6 +93,14 @@ public class BuilderNextQuestion {
             layout.addView(text);
             EditText textBox = new EditText(activity.getBaseContext());
             text.setTextColor(Color.rgb(0,0,0));
+            Button button = new Button(activity.getBaseContext());
+            button.setText("Select");
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
             layout.addView(textBox);
         } else {
             layout.removeAllViews();
