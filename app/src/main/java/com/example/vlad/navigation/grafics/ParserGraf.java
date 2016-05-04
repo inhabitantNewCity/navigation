@@ -12,7 +12,7 @@ public class ParserGraf implements Runnable {
     private static ConcurrentLinkedQueue<MessageSystem> drawQueue;
 
     public ParserGraf() {
-        drawQueue = Drawer.getQueue();
+        drawQueue = DrawerChanges.getQueue();
     }
 
     @Override

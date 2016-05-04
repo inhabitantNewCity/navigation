@@ -5,9 +5,10 @@ import android.hardware.SensorManager;
 
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.Device;
-import com.example.vlad.navigation.lenghtStep.Parser;
+import com.example.vlad.navigation.lenghtStep.ExecutorAlgorithm;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -15,15 +16,26 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class ConnectionLocalSensors implements Connection {
     public Device device = new DeviceLocalSensors();
-    private ConcurrentLinkedQueue<MessageSystem> queue = Parser.getQuery();
+    private ConcurrentLinkedQueue<MessageSystem> queue = ExecutorAlgorithm.getQuery();
     private SensorManager manager;
     @Override
     public void runReadDate() throws Exception {
         Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor sensor0 = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        Sensor sensor1 = manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        Sensor sensor2 = manager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        Sensor sensor3 = manager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+        //Sensor sensor1 = manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        List<Sensor> sensorList = manager.getSensorList(Sensor.TYPE_ALL);
+        String tmp = "";
+        for(int i =0 ; i < sensorList.size() ; i++){
+            tmp += sensorList.get(i).getName();
+        }
+        ListenerLocalAccelerometer listenerAccelerometer = new ListenerLocalAccelerometer();
+        ListenerLocalOrientation listenerLocalOrientation = new ListenerLocalOrientation();
 
-        ListenerLocalAccelerometer listener = new ListenerLocalAccelerometer(Parser.getQuery());
-
-        manager.registerListener(listener,sensor,SensorManager.AXIS_MINUS_X);
+        manager.registerListener(listenerLocalOrientation,sensor0,SensorManager.AXIS_MINUS_X);
+        manager.registerListener(listenerAccelerometer,sensor,SensorManager.AXIS_MINUS_X);
     }
     @Override
     public Device getDevice() {

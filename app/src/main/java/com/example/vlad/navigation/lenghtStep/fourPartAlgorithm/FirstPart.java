@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.vlad.navigation.lenghtStep.FourPartAlgoritm;
+package com.example.vlad.navigation.lenghtStep.fourPartAlgorithm;
 
-import com.example.vlad.navigation.lenghtStep.filters.Filter;
-import com.example.vlad.navigation.lenghtStep.filters.LowPasFilter;
-import com.example.vlad.navigation.lenghtStep.norming.DefoultNorm;
-import com.example.vlad.navigation.lenghtStep.norming.Norm;
+import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters.Filter;
+import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters.LowPasFilter;
+import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming.DefoultNorm;
+import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming.Norm;
 
 /**
  *

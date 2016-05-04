@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.vlad.navigation.grafics.map.BindingMapAndData;
+package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming;
 
 /**
  *
  * @author Roman
  */
-public class Point {
-    public double x;
-    public double y;
+public interface Norm {
+    double[] norming(double[] ar);
+    double modul(double[] ar);
 }

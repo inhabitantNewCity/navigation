@@ -3,11 +3,12 @@ package com.example.vlad.navigation.utils.messageSystem;
 import com.example.vlad.navigation.utils.Vector;
 
 /**
- * Created by Tmp on 14.02.2016.
+ * Created by RoMka on 03.05.2016.
  */
-public class MessageDrawer implements MessageSystem {
+public class MessageCorrectionData implements MessageSystem {
     Vector[] vectors;
-    public MessageDrawer(Vector[] vectors){
+
+    public MessageCorrectionData(Vector[] vectors){
         this.vectors = vectors;
     }
 

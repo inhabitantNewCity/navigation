@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.vlad.navigation.lenghtStep;
+package com.example.vlad.navigation.lenghtStep.fourPartAlgorithm;
 
-import com.example.vlad.navigation.lenghtStep.FourPartAlgoritm.FirstPart;
-import com.example.vlad.navigation.lenghtStep.FourPartAlgoritm.SecondPart;
+import com.example.vlad.navigation.lenghtStep.Counter;
+import com.example.vlad.navigation.utils.Vector;
+
+import java.util.HashMap;
 
 /**
  *
  * @author Roman
  */
-public class ExecuterFourPartAlgoritm {
+public class ExecuterFourPartAlgorithm implements Counter {
     private static final FirstPart firstPart = FirstPart.getInstatance();
     private static final SecondPart secondPart = SecondPart.getInstance();
 
@@ -38,5 +40,9 @@ public class ExecuterFourPartAlgoritm {
         // todo: parse object in parametrs
         // angles parse in returnedMass
     }
-    
+
+    @Override
+    public Vector[] run(HashMap<String, float[]> map) {
+        return new Vector[0];
+    }
 }

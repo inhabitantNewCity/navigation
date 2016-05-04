@@ -5,13 +5,15 @@
  */
 package com.example.vlad.navigation.grafics.map.BindingMapAndData;
 
+import com.example.vlad.navigation.utils.Point;
+
 /**
  *
  * @author Roman
  */
 public class Forecast {
    private static final int SIZE_FILD = 1000;
-   private Point[] fildOfMap = new Point[SIZE_FILD]; 
+   private Point[] fildOfMap = new Point[SIZE_FILD];
    
    private static final Forecast forecast = new Forecast();
    
