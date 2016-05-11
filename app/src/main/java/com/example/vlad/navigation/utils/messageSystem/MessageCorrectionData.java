@@ -6,9 +6,12 @@ import com.example.vlad.navigation.utils.Vector;
  * Created by RoMka on 03.05.2016.
  */
 public class MessageCorrectionData implements MessageSystem {
-    Vector[] vectors;
 
-    public MessageCorrectionData(Vector[] vectors){
+    private Vector vectors;
+
+    private int numberCounter;
+
+    public MessageCorrectionData(Vector vectors){
         this.vectors = vectors;
     }
 
@@ -20,5 +23,13 @@ public class MessageCorrectionData implements MessageSystem {
     @Override
     public Object getMessage() {
         return vectors;
+    }
+
+    public  void setNumberCounter(int i){
+        numberCounter = i;
+    }
+
+    public int getNumberCounter(){
+        return numberCounter;
     }
 }

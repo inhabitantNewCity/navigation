@@ -6,15 +6,10 @@ import android.hardware.SensorManager;
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.ConnectionFactory;
 import com.example.vlad.navigation.connection.Device;
-import com.example.vlad.navigation.grafics.DrawerChanges;
 import com.example.vlad.navigation.grafics.map.BindingMapAndData.ExecutorMapAndData;
-import com.example.vlad.navigation.grafics.map.BuilderSpaceForDraw;
-import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.CounterAlphaBetta;
 import com.example.vlad.navigation.utils.messageSystem.MessageCorrectionData;
-import com.example.vlad.navigation.utils.messageSystem.MessageCounter;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -59,7 +54,9 @@ public class ExecutorAlgorithm  implements Runnable {
         //Thread threadDraw = new Thread(drawerChanges);
         //threadDraw.start();
 
-        Counter counter = AlgorithmFactory.getAlgorithmOnIndex(0);
+        Counter counterAlphaBetta = AlgorithmFactory.getAlgorithmOnIndex(0);
+        Counter counterFourPart = AlgorithmFactory.getAlgorithmOnIndex(1);
+
         while (true){
             if(myQuery.isEmpty()){
                 try {
@@ -72,8 +69,13 @@ public class ExecutorAlgorithm  implements Runnable {
             }
             else {
                 HashMap<String,float[]> map =(HashMap<String, float[]>)( (myQuery.poll()).getMessage());
-                MessageCorrectionData message = new MessageCorrectionData(counter.run(map));
-                queue.add(message);
+                //MessageCorrectionData messageAlphaBetta = new MessageCorrectionData(counterAlphaBetta.run(map));
+                //messageAlphaBetta.setNumberCounter(0);
+                //queue.add(messageAlphaBetta);
+
+                MessageCorrectionData messageFourPart  = new MessageCorrectionData(counterFourPart.run(map));
+                messageFourPart.setNumberCounter(0);
+                queue.add(messageFourPart);
             }
         }
     }

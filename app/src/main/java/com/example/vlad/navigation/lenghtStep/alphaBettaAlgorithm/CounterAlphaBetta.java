@@ -2,6 +2,8 @@ package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm;
 
 import com.example.vlad.navigation.grafics.DrawerChanges;
 import com.example.vlad.navigation.lenghtStep.Counter;
+import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters.Filter;
+import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters.LowPasFilter;
 import com.example.vlad.navigation.utils.Vector;
 import com.example.vlad.navigation.utils.messageSystem.MessageCounter;
 import com.example.vlad.navigation.utils.messageSystem.MessageDrawer;
@@ -18,6 +20,7 @@ public class CounterAlphaBetta implements Counter {
 
   //  private static ConcurrentLinkedQueue<MessageSystem> myQueue = new ConcurrentLinkedQueue();
     //private static ConcurrentLinkedQueue<MessageSystem> queueGraf;
+    private Filter lowPasFilter = LowPasFilter.getInstance();
 
     private float[] acc = new float[3];
     private float[] accAngle = new float[3];
@@ -39,24 +42,30 @@ public class CounterAlphaBetta implements Counter {
         // myQueue;
     //}
 
-    public Vector[] run(HashMap<String,float[]> map) {
-                parse(map);
-                lengthStep();
-                return sendMessage();
+    public Vector run(HashMap<String,float[]> map) {
+        parse(map);
+        lowPasFilter.filtering(acc);
+        lengthStep();
+        return sendMessage();
     }
 
-    private Vector[] sendMessage() {
-        Vector[] vectors = new Vector[2];
-        vectors[0] = new Vector("S",S);
-        vectors[1] = new Vector("Angle",angle);
-        return vectors;
+    private Vector sendMessage() {
+        //vectors[0] = new Vector("S",S);
+        Vector vector = new Vector("Angle",angle,norming());
+        return vector;
     }
 
     private void parse(HashMap<String, float[]> map) {
         acc =  map.get("Acc");
         angle =  map.get("Angl");
     }
-
+    private float norming(){
+        float sum = 0;
+        for (int i = 0; i < S.length; i++ ){
+            sum += S[i]*S[i];
+        }
+        return (float)Math.sqrt(sum);
+    }
     private void lengthStep() {
 
         for(int i = 0; i < acc.length; i++){

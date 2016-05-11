@@ -29,6 +29,8 @@ public class DrawerChanges implements Runnable {
     private Point start  = new Point();
     private Point finish = new Point();
 
+    private int offset = 10;
+
     public DrawerChanges(SurfaceHolder builder){
         builderSpaceForDraw = builder;
     }
@@ -38,9 +40,9 @@ public class DrawerChanges implements Runnable {
         while(true){
             if(!myQueue.isEmpty()){
                 MessageDrawer ms = (MessageDrawer) myQueue.poll();
-                Vector[] vectors = (Vector[]) ms.getMessage();
-                parse(vectors);
-                drawChanges(canvas);
+                Vector vector = (Vector) ms.getMessage();
+                parse(vector, ms.getNumberCounter());
+                drawChanges(ms.getNumberCounter());
             }
             try {
                 synchronized (lock) {
@@ -53,17 +55,35 @@ public class DrawerChanges implements Runnable {
     }
 
     private void setInitialisationParameters() {
-        start.x = 0;
-        start.y = 0;
+        start.x = 100;
+        start.y = 200;
+        canvas = builderSpaceForDraw.lockCanvas();
+        try{
+            synchronized (builderSpaceForDraw){
+                //canvas.drawColor(Color.WHITE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            if(canvas != null)
+                builderSpaceForDraw.unlockCanvasAndPost(canvas);
+        }
     }
 
-    private void drawChanges(Canvas canvas) {
-        canvas = builderSpaceForDraw.lockCanvas();
+    private void drawChanges(int flag) {
+        this.canvas = builderSpaceForDraw.lockCanvas();
         try {
             synchronized (builderSpaceForDraw) {
+                    //canvas.drawColor(Color.WHITE);
                     Paint pen = new Paint();
-                    pen.setColor(Color.RED);
-                    canvas.drawLine(start.x,start.y, finish.x,finish.y, pen);
+                    //pen.set
+                    if(flag == 0) {
+                        pen.setColor(Color.RED);
+                    }else{
+                        pen.setColor(Color.WHITE);
+                    }
+                    this.canvas.drawLine(start.x,start.y, finish.x,finish.y, pen);
                     start.x = finish.x;
                     start.y = finish.y;
                 // canvas.drawBitmap(picture, matrix, null);
@@ -79,26 +99,23 @@ public class DrawerChanges implements Runnable {
         }
     }
 
-    private void parse(Vector[] vectors) {
+    private void parse(Vector vector, int numberAlgorithm) {
         // get 4 point for draw line from vectors
-        Vector lengthStep = vectors[0];
-        Vector orientationStep = vectors[1];
+        //Vector lengthStep = vector;
+        //Vector  = vector[1];
 
-        float lengthCurrentStep = lengthCurrentStep(lengthStep.getX(), lengthStep.getY(), lengthStep.getZ());
-        setOrientationLine(orientationStep,lengthCurrentStep);
+        float lengthCurrentStep = vector.getLength();   //lengthCurrentStep(lengthStep.getX(), lengthStep.getY(), lengthStep.getZ());
+        setOrientationLine(vector,lengthCurrentStep, numberAlgorithm);
         // define orientation current vector
 
 
     }
-    private void setOrientationLine(Vector orientationVector, float lengthStep ){
+    private void setOrientationLine(Vector orientationVector, float lengthStep, int numberAlgorithm ){
         //use matrix angle
 
         finish.x = (float) -Math.sin(orientationVector.getX()) * (lengthStep) + start.x;
-        finish.y = (float) Math.cos(orientationVector.getX()) * (lengthStep) + start.y;
+        finish.y = (float) Math.cos(orientationVector.getX()) * (lengthStep) + start.y + numberAlgorithm * offset;
 
-    }
-    private float lengthCurrentStep(float x, float y, float z){
-        return (float) Math.sqrt( x*x + y*y + z*z );
     }
     public static ConcurrentLinkedQueue<MessageSystem> getQueue() {
         return myQueue;

@@ -12,8 +12,8 @@ package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming;
 public class DefoultNorm implements Norm {
 
     @Override
-    public double[] norming(double[] ar) {
-        double[] mass = ar;
+    public float[] norming(float[] ar) {
+        float[] mass = ar;
         for(int i = 0; i < ar.length; i++){
             mass[i] /= 100.0;
         }
@@ -21,12 +21,12 @@ public class DefoultNorm implements Norm {
     }
 
     @Override
-    public double modul(double[] ar) {
+    public float modul(float[] ar) {
         double tmp = 0.0;
         for(int i = 0 ; i < ar.length; i++){
             tmp += ar[i]*ar[i];
         }
-        return Math.sqrt(tmp);
+        return (float)Math.sqrt(tmp);
     }
     
     

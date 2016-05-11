@@ -10,6 +10,6 @@ package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming;
  * @author Roman
  */
 public interface Norm {
-    double[] norming(double[] ar);
-    double modul(double[] ar);
+    float[] norming(float[] ar);
+    float modul(float[] ar);
 }

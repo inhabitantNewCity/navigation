@@ -15,10 +15,10 @@ import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming.Norm;
  * @author Roman
  */
 public class FirstPart {
-    private static final double ACCSTEP = 2.0;
-    private static final double ACCRUN = 4.0;
+    private static final double ACC_STEP = 1.0;
+    private static final double ACC_RUN = 120.0;
     
-    private boolean flagStepFinded = false;
+    private boolean flagStepFind = false;
     
     
     private final Filter filter = (Filter) LowPasFilter.getInstance();
@@ -29,30 +29,31 @@ public class FirstPart {
     
     private FirstPart(){};
     
-    public static FirstPart getInstatance(){
+    public static FirstPart getInstance(){
         return firstPart;
     }
 
-    public double getAcceleration(double[] ar){
-        double[] mass;
+    public float getAcceleration(float[] ar){
+        float[] mass;
         mass = filter.filtering(ar);
         //mass = norm.norming(mass);
-        double mod = norm.modul(mass);
+        float mod = norm.modul(mass);
         return mod;
     } 
+
     public boolean recognitionStepOnModuleAcc(double mod){
                 if(recognitionStep(mod)){
-            if(!flagStepFinded){
-                flagStepFinded = true;
+            if(!flagStepFind){
+                flagStepFind = true;
                 return true;
             }
         }
         else{
-            flagStepFinded = false;
+            flagStepFind = false;
         }
         return false;
     }
     private boolean recognitionStep(double a){
-       return (a > ACCSTEP) & (a < ACCRUN);
+       return (a > ACC_STEP) && (a < ACC_RUN);
     }
 }

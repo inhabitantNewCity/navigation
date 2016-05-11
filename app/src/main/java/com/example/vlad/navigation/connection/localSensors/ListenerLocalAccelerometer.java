@@ -4,6 +4,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
+import java.util.Date;
+
 /**
  * Created by RoMka on 02.05.2016.
  */
@@ -13,6 +15,9 @@ public class ListenerLocalAccelerometer implements SensorEventListener {
 
     private final float alpha = 0.8f;
     private float[] gravity = {0,0,0};
+
+    private int deltaTime = 10;
+    private long lastTime = System.currentTimeMillis();
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -25,8 +30,11 @@ public class ListenerLocalAccelerometer implements SensorEventListener {
         linerAccelerometerDate[0] = event.values[0] - gravity[0];
         linerAccelerometerDate[1] = event.values[1] - gravity[1];
         linerAccelerometerDate[2] = event.values[2] - gravity[2];
-
-        builder.setAccelerometerData(linerAccelerometerDate);
+        long currentTime = System.currentTimeMillis();
+        if(deltaTime < currentTime - lastTime) {
+            builder.setAccelerometerData(linerAccelerometerDate);
+            lastTime = currentTime;
+        }
     }
 
     @Override

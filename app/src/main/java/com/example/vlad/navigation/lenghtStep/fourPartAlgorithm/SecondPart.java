@@ -10,7 +10,7 @@ package com.example.vlad.navigation.lenghtStep.fourPartAlgorithm;
  * @author Roman
  */
 public class SecondPart {
-   private double summ = 0.0;
+   private float summ = 0.0f;
    private int countStep;
    
     
@@ -21,12 +21,12 @@ public class SecondPart {
        return secondPart;
    }
    
-   public double getlenghtStep(double a){
+   public float getlenghtStep(float a){
        return calculationLenghtStep(a);
    }
    
-   private double calculationLenghtStep(double a){
+   private float calculationLenghtStep(float a){
        summ += a / countStep;
-       return Math.pow(summ, 1/3);
+       return (float)Math.pow(summ, 1/3);
    }
 }

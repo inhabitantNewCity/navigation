@@ -7,6 +7,7 @@ package com.example.vlad.navigation.grafics.map.BindingMapAndData;
 
 import com.example.vlad.navigation.grafics.DrawerChanges;
 import com.example.vlad.navigation.utils.Vector;
+import com.example.vlad.navigation.utils.messageSystem.MessageCorrectionData;
 import com.example.vlad.navigation.utils.messageSystem.MessageDrawer;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
@@ -43,16 +44,17 @@ public class ExecutorMapAndData implements Runnable {
                 }
             }
             else {
-                MessageSystem message = myQueue.poll();
-                Vector[] vectors = optimizationData(message);
-                queue.add(new MessageDrawer(vectors));
+                MessageCorrectionData message = (MessageCorrectionData) myQueue.poll();
+                Vector vectors = optimizationData(message);
+                MessageDrawer messageDrawer = new MessageDrawer(vectors);
+                messageDrawer.setNumberCounter(message.getNumberCounter());
+                queue.add(messageDrawer);
             }
         }
     }
 
-    private Vector[] optimizationData(MessageSystem message) {
-        Vector[] vectors = (Vector[]) message.getMessage();
-
+    private Vector optimizationData(MessageSystem message) {
+        Vector vectors = (Vector) message.getMessage();
         return vectors;
     }
 }

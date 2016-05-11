@@ -9,20 +9,32 @@ import java.util.IllegalFormatException;
  * Created by Tmp on 19.02.2016.
  */
 public class Vector {
+
     private String title;
 
+    private float length;
     private float x;
     private float y;
     private float z;
 
-    public Vector(String title, float[] arr) throws IllegalFormatException {
+    public Vector(String title, float[] arr, float length) throws IllegalFormatException {
         if(arr.length < 3) {
             throw new ArraySizeException();
         }
         x = arr[0];
         y = arr[1];
         z = arr[2];
+        this.length = length;
         this.title = title;
+    }
+
+
+    public float getLength() {
+        return length;
+    }
+
+    public void setLength(float length) {
+        this.length = length;
     }
 
     public float getX() {

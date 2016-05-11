@@ -11,9 +11,17 @@ public class ListenerLocalOrientation implements SensorEventListener {
 
     BuilderMessageToCounter builder = BuilderMessageToCounter.getInstance();
 
+    private int deltaTime = 10;
+    private long lastTime = 0;
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        builder.setOrientationData(event.values);
+        long currentTime = System.currentTimeMillis();
+        if(deltaTime < currentTime - lastTime) {
+            builder.setOrientationData(event.values);
+            lastTime = currentTime;
+        }
+
     }
 
     @Override

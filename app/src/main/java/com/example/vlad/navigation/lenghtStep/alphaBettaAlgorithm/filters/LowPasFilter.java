@@ -12,7 +12,7 @@ package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters;
 public class LowPasFilter implements Filter {
     
     private static float k = 0.3f;
-    private double[] lastMass = new double[3];
+    private float[] lastMass = new float[3];
 
     private static final LowPasFilter instance = new LowPasFilter();
     
@@ -23,8 +23,8 @@ public class LowPasFilter implements Filter {
         return instance;
     }
     @Override
-    public double[] filtering (double[] ar){
-        double[] mass = new double[3];
+    public float[] filtering (float[] ar){
+        float[] mass = new float[3];
   
         for(int i = 0; i < mass.length; i++){
             mass[i] = (1-k) * lastMass[i] + k * ar[i];
@@ -34,6 +34,6 @@ public class LowPasFilter implements Filter {
     }
     
     public void clear(){
-        lastMass = new double[3];
+        lastMass = new float[3];
     }
 }

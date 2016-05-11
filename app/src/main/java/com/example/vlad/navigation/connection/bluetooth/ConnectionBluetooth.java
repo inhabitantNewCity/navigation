@@ -40,19 +40,19 @@ public class ConnectionBluetooth implements Connection {
                 //byte[] pin = {1,2,3,4};
                 //Set<android.bluetooth.BluetoothDevice> pairedDevices = bluetooth.getBondedDevices();
                 //if(!pairedDevices.isEmpty()){
-                  //  for(android.bluetooth.BluetoothDevice device : pairedDevices){
-                    //    String tmp = device.getName();
-                      //  Method mPin = device.getClass().getMethod("setPin", byte[].class);
-                        //mPin.invoke(device, pin);
-                        //Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
-                        //socket = (BluetoothSocket) m.invoke(device, 1);
-                        //socket = device.createRfcommSocketToServiceRecord(UUID.randomUUID());
-                  //  }
+                //  for(android.bluetooth.BluetoothDevice device : pairedDevices){
+                //    String tmp = device.getName();
+                //  Method mPin = device.getClass().getMethod("setPin", byte[].class);
+                //mPin.invoke(device, pin);
+                //Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
+                //socket = (BluetoothSocket) m.invoke(device, 1);
+                //socket = device.createRfcommSocketToServiceRecord(UUID.randomUUID());
+                //  }
                 //}
-                    socket.connect();
-                    input = socket.getInputStream();
-                    out = socket.getOutputStream();
-                    //now you can use out to send output via out.write
+                socket.connect();
+                input = socket.getInputStream();
+                out = socket.getOutputStream();
+                //now you can use out to send output via out.write
             }
             else
             {

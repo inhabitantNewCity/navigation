@@ -10,5 +10,5 @@ package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters;
  * @author Roman
  */
 public interface Filter {
-    double[] filtering(double[] ar);
+    float[] filtering(float[] ar);
 }
