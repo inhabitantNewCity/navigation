@@ -11,12 +11,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        ndk {
-            moduleName "myapp"
-            cFlags "-DANDROID_NDK"
-            ldLibs "log"
-            stl "stlport_static"
-        }
     }
     buildTypes {
         release {
@@ -24,8 +18,6 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
-        debug.jniDebugBuild true
         }
     }
     sourceSets.main {
