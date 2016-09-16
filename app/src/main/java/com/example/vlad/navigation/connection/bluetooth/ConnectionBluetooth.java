@@ -28,7 +28,7 @@ public class ConnectionBluetooth implements Connection {
         bluetooth = BluetoothAdapter.getDefaultAdapter();
     }
     @Override
-    public void runReadDate() throws Exception {
+    public OutputStream runReadDate() throws Exception {
         InputStream input = null;
         OutputStream out = null;
         BluetoothSocket socket = null;
@@ -53,6 +53,7 @@ public class ConnectionBluetooth implements Connection {
                     input = socket.getInputStream();
                     out = socket.getOutputStream();
                     //now you can use out to send output via out.write
+                    return out;
             }
             else
             {
@@ -65,7 +66,7 @@ public class ConnectionBluetooth implements Connection {
             Exception bluetoothExeption = new NotFindBluetoothModuleException();
             throw bluetoothExeption;
         }
-
+        return null;
     }
 
     @Override

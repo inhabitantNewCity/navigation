@@ -14,6 +14,7 @@ import com.example.vlad.navigation.utils.messageSystem.MessageCorrectionData;
 import com.example.vlad.navigation.utils.messageSystem.MessageCounter;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -34,47 +35,29 @@ public class ExecutorAlgorithm  implements Runnable {
     private Object lock = new Object();
 
     public ExecutorAlgorithm(SensorManager systemService, Context context) {
+
         connection = ConnectionFactory.getDefaultConnection();
-        //this.queue = CounterAlphaBetta.getQueue();
         device = connection.getDevice();
         manager = systemService;
         this.context = context;
     }
     @Override
     public void run()  {
-        Connection connect = ConnectionFactory.getLocalConnection();
-        connect.setParameters(manager);
-        try {
-            connect.runReadDate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         ExecutorMapAndData executorMapAndData = new ExecutorMapAndData();
         Thread treadMapAndDate = new Thread(executorMapAndData);
         treadMapAndDate.start();
-        //executorMapAndData.run();
+        try {
+            Counter counter = AlgorithmFactory.getAlgorithmOnIndex(0);
+            OutputStream stream = connection.runReadDate();
+            while (true){
 
-        //BuilderSpaceForDraw builderSpaceForDraw = new BuilderSpaceForDraw(context);
-        //Thread threadDraw = new Thread(drawerChanges);
-        //threadDraw.start();
-
-        Counter counter = AlgorithmFactory.getAlgorithmOnIndex(0);
-        while (true){
-            if(myQuery.isEmpty()){
-                try {
-                    synchronized (lock) {
-                        lock.wait(10);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                    HashMap<String,float[]> map = device.parse(stream);
+                    MessageCorrectionData message = new MessageCorrectionData(counter.run(map));
+                    queue.add(message);
             }
-            else {
-                HashMap<String,float[]> map =(HashMap<String, float[]>)( (myQuery.poll()).getMessage());
-                MessageCorrectionData message = new MessageCorrectionData(counter.run(map));
-                queue.add(message);
-            }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

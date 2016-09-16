@@ -6,6 +6,7 @@ import com.example.vlad.navigation.connection.Device;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +17,8 @@ import java.util.HashMap;
 public class DeviceLocalSensors implements Device {
 
     @Override
-    public HashMap<String, float[]> parse(MessageSystem data) throws Exception {
-        float[] arrayData = (float[]) data.getMessage();
+    public HashMap<String, float[]> parse(OutputStream stream) throws Exception {
+        float[] arrayData = {1,2,3};//(float[]) data.getMessage();
         HashMap<String,float[]> map = new HashMap<>();
 
         map.put("A",arrayData);

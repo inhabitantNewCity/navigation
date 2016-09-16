@@ -8,6 +8,7 @@ import com.example.vlad.navigation.connection.Device;
 import com.example.vlad.navigation.lenghtStep.ExecutorAlgorithm;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
+import java.io.OutputStream;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -19,7 +20,7 @@ public class ConnectionLocalSensors implements Connection {
     private ConcurrentLinkedQueue<MessageSystem> queue = ExecutorAlgorithm.getQuery();
     private SensorManager manager;
     @Override
-    public void runReadDate() throws Exception {
+    public OutputStream runReadDate() throws Exception {
         Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         Sensor sensor0 = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         Sensor sensor1 = manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -36,6 +37,7 @@ public class ConnectionLocalSensors implements Connection {
 
         manager.registerListener(listenerLocalOrientation,sensor0,SensorManager.AXIS_MINUS_X);
         manager.registerListener(listenerAccelerometer,sensor,SensorManager.AXIS_MINUS_X);
+        return null;
     }
     @Override
     public Device getDevice() {

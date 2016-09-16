@@ -9,6 +9,7 @@ import com.example.vlad.navigation.exeption.ArraySizeException;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class BluetoothDeviceImpl implements com.example.vlad.navigation.connecti
     }
 
     @Override
-    public HashMap<String, float[]> parse(MessageSystem data) throws Exception {
+    public HashMap<String, float[]> parse(OutputStream stream) throws Exception {
         HashMap<String,float[]> map = new HashMap<>();
         Integer array[][] = new Integer[6][3] ;
         //if(data.size() != sizeArray){
