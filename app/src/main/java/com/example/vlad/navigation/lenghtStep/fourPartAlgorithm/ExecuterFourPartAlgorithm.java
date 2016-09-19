@@ -28,7 +28,7 @@ public class ExecuterFourPartAlgorithm implements Counter {
    
     // method must have name equals name of method in interface(project android studio)
     // method return 4 value: lenght and 3 angle
-    // parametors method is 12 doubles (3 sensors give 9 value plus 3 angle)
+    // parameters method is 12 doubles (3 sensors give 9 value plus 3 angle)
     public double[] execute(Object ar){
         parseSomething(ar);
         double a = firstPart.getAcceleration(acc);
@@ -42,7 +42,7 @@ public class ExecuterFourPartAlgorithm implements Counter {
     }
 
     @Override
-    public Vector[] run(HashMap<String, float[]> map) {
-        return new Vector[0];
+    public Vector run(HashMap<String, float[]> map) {
+        return new Vector("from Four Part Algorithm", new float[3], 2);
     }
 }

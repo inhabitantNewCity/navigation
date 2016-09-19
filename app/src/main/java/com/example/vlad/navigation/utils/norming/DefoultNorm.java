@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming;
+package com.example.vlad.navigation.utils.norming;
 
 /**
  *
@@ -21,7 +21,7 @@ public class DefoultNorm implements Norm {
     }
 
     @Override
-    public double modul(double[] ar) {
+    public double modul(float[] ar) {
         double tmp = 0.0;
         for(int i = 0 ; i < ar.length; i++){
             tmp += ar[i]*ar[i];

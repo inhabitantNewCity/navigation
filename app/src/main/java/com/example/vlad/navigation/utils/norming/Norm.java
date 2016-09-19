@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters;
+package com.example.vlad.navigation.utils.norming;
 
 /**
  *
  * @author Roman
  */
-public interface Filter {
-    double[] filtering(double[] ar);
+public interface Norm {
+    double[] norming(double[] ar);
+    double modul(float[] ar);
 }

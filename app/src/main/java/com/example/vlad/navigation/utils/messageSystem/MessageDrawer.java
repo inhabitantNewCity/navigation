@@ -6,9 +6,9 @@ import com.example.vlad.navigation.utils.Vector;
  * Created by Tmp on 14.02.2016.
  */
 public class MessageDrawer implements MessageSystem {
-    Vector[] vectors;
-    public MessageDrawer(Vector[] vectors){
-        this.vectors = vectors;
+    Vector vector;
+    public MessageDrawer(Vector vector){
+        this.vector = vector;
     }
 
     @Override
@@ -18,6 +18,6 @@ public class MessageDrawer implements MessageSystem {
 
     @Override
     public Object getMessage() {
-        return vectors;
+        return vector;
     }
 }

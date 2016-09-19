@@ -38,8 +38,8 @@ public class DrawerChanges implements Runnable {
         while(true){
             if(!myQueue.isEmpty()){
                 MessageDrawer ms = (MessageDrawer) myQueue.poll();
-                Vector[] vectors = (Vector[]) ms.getMessage();
-                parse(vectors);
+                Vector vectors = (Vector) ms.getMessage();
+                setOrientationLine(vectors);
                 drawChanges(canvas);
             }
             try {
@@ -79,26 +79,12 @@ public class DrawerChanges implements Runnable {
         }
     }
 
-    private void parse(Vector[] vectors) {
-        // get 4 point for draw line from vectors
-        Vector lengthStep = vectors[0];
-        Vector orientationStep = vectors[1];
-
-        float lengthCurrentStep = lengthCurrentStep(lengthStep.getX(), lengthStep.getY(), lengthStep.getZ());
-        setOrientationLine(orientationStep,lengthCurrentStep);
-        // define orientation current vector
-
-
-    }
-    private void setOrientationLine(Vector orientationVector, float lengthStep ){
+    private void setOrientationLine(Vector orientationVector){
         //use matrix angle
 
-        finish.x = (float) -Math.sin(orientationVector.getX()) * (lengthStep) + start.x;
-        finish.y = (float) Math.cos(orientationVector.getX()) * (lengthStep) + start.y;
+        finish.x = (float) (-Math.sin(orientationVector.x) * (orientationVector.length) + start.x);
+        finish.y = (float) (Math.cos(orientationVector.y) * (orientationVector.length) + start.y);
 
-    }
-    private float lengthCurrentStep(float x, float y, float z){
-        return (float) Math.sqrt( x*x + y*y + z*z );
     }
     public static ConcurrentLinkedQueue<MessageSystem> getQueue() {
         return myQueue;

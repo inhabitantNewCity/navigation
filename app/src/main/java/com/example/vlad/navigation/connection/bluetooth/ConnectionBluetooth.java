@@ -3,6 +3,7 @@ package com.example.vlad.navigation.connection.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.renderscript.ScriptGroup;
 
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.Device;
@@ -28,9 +29,10 @@ public class ConnectionBluetooth implements Connection {
         bluetooth = BluetoothAdapter.getDefaultAdapter();
     }
     @Override
-    public OutputStream runReadDate() throws Exception {
+    public InputOutputStream runReadDate() throws Exception {
         InputStream input = null;
         OutputStream out = null;
+
         BluetoothSocket socket = null;
         if(bluetooth != null){
             if (bluetooth.isEnabled()) {
@@ -50,10 +52,12 @@ public class ConnectionBluetooth implements Connection {
                   //  }
                 //}
                     socket.connect();
+
                     input = socket.getInputStream();
                     out = socket.getOutputStream();
+                InputOutputStream stream = new InputOutputStream(socket.getInputStream(),socket.getOutputStream());
                     //now you can use out to send output via out.write
-                    return out;
+                    return stream;
             }
             else
             {

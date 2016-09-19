@@ -6,6 +6,8 @@ import com.example.vlad.navigation.utils.Vector;
 import com.example.vlad.navigation.utils.messageSystem.MessageCounter;
 import com.example.vlad.navigation.utils.messageSystem.MessageDrawer;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
+import com.example.vlad.navigation.utils.norming.DefoultNorm;
+import com.example.vlad.navigation.utils.norming.Norm;
 
 
 import java.util.HashMap;
@@ -39,17 +41,18 @@ public class CounterAlphaBetta implements Counter {
         // myQueue;
     //}
 
-    public Vector[] run(HashMap<String,float[]> map) {
+    public Vector run(HashMap<String,float[]> map) {
                 parse(map);
                 lengthStep();
                 return sendMessage();
     }
 
-    private Vector[] sendMessage() {
-        Vector[] vectors = new Vector[2];
-        vectors[0] = new Vector("S",S);
-        vectors[1] = new Vector("Angle",angle);
-        return vectors;
+    private Vector sendMessage() {
+        Norm norm = new DefoultNorm();
+        Vector vector = new Vector("from Alpha Betta Algorithm", angle, norm.modul(S));
+
+        //vectors = new Vector("Angle",angle);
+        return vector;
     }
 
     private void parse(HashMap<String, float[]> map) {

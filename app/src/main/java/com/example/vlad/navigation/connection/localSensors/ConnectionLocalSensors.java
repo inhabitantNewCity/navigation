@@ -6,6 +6,7 @@ import android.hardware.SensorManager;
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.Device;
 import com.example.vlad.navigation.lenghtStep.ExecutorAlgorithm;
+import com.example.vlad.navigation.utils.InputOutputStream;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
 import java.io.OutputStream;
@@ -20,7 +21,7 @@ public class ConnectionLocalSensors implements Connection {
     private ConcurrentLinkedQueue<MessageSystem> queue = ExecutorAlgorithm.getQuery();
     private SensorManager manager;
     @Override
-    public OutputStream runReadDate() throws Exception {
+    public InputOutputStream runReadDate() throws Exception {
         Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         Sensor sensor0 = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         Sensor sensor1 = manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);

@@ -1,5 +1,6 @@
 package com.example.vlad.navigation.utils;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -14,4 +15,11 @@ public class InputOutputStream {
         this.in = in;
         this.out = out;
     }
+    public int read(byte[] buffer) throws IOException {
+        return in.read(buffer);
+    }
+    public void write(byte buffer) throws IOException {
+        out.write(buffer);
+    }
+
 }

@@ -10,6 +10,8 @@ import com.example.vlad.navigation.grafics.DrawerChanges;
 import com.example.vlad.navigation.grafics.map.BindingMapAndData.ExecutorMapAndData;
 import com.example.vlad.navigation.grafics.map.BuilderSpaceForDraw;
 import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.CounterAlphaBetta;
+import com.example.vlad.navigation.utils.InputOutputStream;
+import com.example.vlad.navigation.utils.Vector;
 import com.example.vlad.navigation.utils.messageSystem.MessageCorrectionData;
 import com.example.vlad.navigation.utils.messageSystem.MessageCounter;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
@@ -45,16 +47,19 @@ public class ExecutorAlgorithm  implements Runnable {
     public void run()  {
 
         ExecutorMapAndData executorMapAndData = new ExecutorMapAndData();
-        Thread treadMapAndDate = new Thread(executorMapAndData);
-        treadMapAndDate.start();
+        //Thread treadMapAndDate = new Thread(executorMapAndData);
+        //treadMapAndDate.start();
         try {
-            Counter counter = AlgorithmFactory.getAlgorithmOnIndex(0);
-            OutputStream stream = connection.runReadDate();
+            Counter counter = AlgorithmFactory.getAlgorithmOnIndex(2);
+            InputOutputStream stream = connection.runReadDate();
             while (true){
 
-                    HashMap<String,float[]> map = device.parse(stream);
-                    MessageCorrectionData message = new MessageCorrectionData(counter.run(map));
+                HashMap<String,float[]> map = device.parse(stream);
+                Vector sendVector = counter.run(map);
+                if(sendVector != null) {
+                    MessageCorrectionData message = new MessageCorrectionData(sendVector);
                     queue.add(message);
+                }
             }
         }catch (Exception e) {
             e.printStackTrace();

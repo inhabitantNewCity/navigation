@@ -6,9 +6,9 @@ import com.example.vlad.navigation.utils.Vector;
  * Created by RoMka on 03.05.2016.
  */
 public class MessageCorrectionData implements MessageSystem {
-    Vector[] vectors;
+    Vector vectors;
 
-    public MessageCorrectionData(Vector[] vectors){
+    public MessageCorrectionData(Vector vectors){
         this.vectors = vectors;
     }
 

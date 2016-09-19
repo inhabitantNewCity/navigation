@@ -44,15 +44,15 @@ public class ExecutorMapAndData implements Runnable {
             }
             else {
                 MessageSystem message = myQueue.poll();
-                Vector[] vectors = optimizationData(message);
-                queue.add(new MessageDrawer(vectors));
+                Vector vector = optimizationData(message);
+                queue.add(new MessageDrawer(vector));
             }
         }
     }
 
-    private Vector[] optimizationData(MessageSystem message) {
-        Vector[] vectors = (Vector[]) message.getMessage();
+    private Vector optimizationData(MessageSystem message) {
+        Vector vector = (Vector) message.getMessage();
 
-        return vectors;
+        return vector;
     }
 }

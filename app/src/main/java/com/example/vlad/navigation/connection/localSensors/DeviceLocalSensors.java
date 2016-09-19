@@ -3,6 +3,7 @@ package com.example.vlad.navigation.connection.localSensors;
 import android.bluetooth.BluetoothSocket;
 
 import com.example.vlad.navigation.connection.Device;
+import com.example.vlad.navigation.utils.InputOutputStream;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 public class DeviceLocalSensors implements Device {
 
     @Override
-    public HashMap<String, float[]> parse(OutputStream stream) throws Exception {
+    public HashMap<String, float[]> parse(InputOutputStream stream) throws Exception {
         float[] arrayData = {1,2,3};//(float[]) data.getMessage();
         HashMap<String,float[]> map = new HashMap<>();
 

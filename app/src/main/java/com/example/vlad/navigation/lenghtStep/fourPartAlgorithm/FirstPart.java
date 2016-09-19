@@ -5,10 +5,10 @@
  */
 package com.example.vlad.navigation.lenghtStep.fourPartAlgorithm;
 
-import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters.Filter;
-import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.filters.LowPasFilter;
-import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming.DefoultNorm;
-import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.norming.Norm;
+import com.example.vlad.navigation.utils.filters.Filter;
+import com.example.vlad.navigation.utils.filters.LowPasFilter;
+import com.example.vlad.navigation.utils.norming.DefoultNorm;
+import com.example.vlad.navigation.utils.norming.Norm;
 
 /**
  *
@@ -36,8 +36,12 @@ public class FirstPart {
     public double getAcceleration(double[] ar){
         double[] mass;
         mass = filter.filtering(ar);
+        float[] result  = new float[3];
+        for(int i = 0; i < result.length; i++){
+            result[i] = (float)mass[i];
+        }
         //mass = norm.norming(mass);
-        double mod = norm.modul(mass);
+        double mod = norm.modul(result);
         return mod;
     } 
     public boolean recognitionStepOnModuleAcc(double mod){
