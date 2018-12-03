@@ -21,9 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".grafics.defineLocationSystems.dialogSystem.DialogSystemActivity" />
-        <activity android:name=".grafics.defineLocationSystems.pointOnMapSystem.PointOnMapActivity" />
-        <activity android:name=".grafics.map.MapActivity" />
+        <activity android:name=".ui.defineLocationSystems.dialogSystem.DialogSystemActivity" />
+        <activity android:name=".ui.defineLocationSystems.pointOnMapSystem.PointOnMapActivity" />
+        <activity android:name=".ui.map.MapActivity" />
     </application>
 
 </manifest>

@@ -5,11 +5,10 @@ import android.hardware.SensorManager;
 
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.Device;
-import com.example.vlad.navigation.lenghtStep.ExecutorAlgorithm;
+import com.example.vlad.navigation.calculation.inertialSystem.ExecutorAlgorithm;
 import com.example.vlad.navigation.utils.InputOutputStream;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
-import java.io.OutputStream;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

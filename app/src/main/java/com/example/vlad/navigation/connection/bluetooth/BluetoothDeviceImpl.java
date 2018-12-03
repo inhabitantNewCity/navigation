@@ -20,9 +20,8 @@ import static  com.example.vlad.navigation.utils.Constants.*;
  * Created by Tmp on 13.02.2016.
  */
 public class BluetoothDeviceImpl implements com.example.vlad.navigation.connection.bluetooth.BluetoothDevice {
-    private static final String MAC_ADDRESS = "20:13:05:24:07:18" ;
+    private static final String MAC_ADDRESS = "98:D3:31:70:2B:5B" ;
     private static final UUID uuid = UUID.randomUUID();
-    private static final int sizeArray = 12;
     private static final byte[] pin = {1,2,3,4};
 
     private BluetoothDevice device;
@@ -50,18 +49,13 @@ public class BluetoothDeviceImpl implements com.example.vlad.navigation.connecti
         stream.write(inputtedByte);
         stream.read(readBytes);
 
-        map.put(nameFieldsDevice[0], parseData(readBytes, 4, 9)); // parsing accelerations
+        short lastAngle = (short)((readBytes[27] << 8) + readBytes[26]);
+
+        map.put(nameFieldsDevice[0], parseAccDate(readBytes)); // parsing accelerations
         map.put(nameFieldsDevice[1], parseData(readBytes, 11, 16)); // parsing data from gyroscope
         map.put(nameFieldsDevice[2], parseData(readBytes, 17, 22)); // parsing data from compose
-        map.put(nameFieldsDevice[3], parseData(readBytes, 23, 27)); // parsing angles
+        map.put(nameFieldsDevice[3], parseAngles(readBytes)); // parsing angles
 
-        /*for(int i = 0, j = 0 ; i < readBytes.length; i+=2, j++) {
-            buffer.put(readBytes[i]);
-            buffer.put(readBytes[i+1]);
-            readShorts[j] = buffer.getShort(0);
-            buffer = ByteBuffer.allocate(2);
-            forDebug += "      " + readShorts[j];
-        }*/
 
         return map;
     }
@@ -75,15 +69,27 @@ public class BluetoothDeviceImpl implements com.example.vlad.navigation.connecti
     }
 
     private float[] parseData(byte[] readBytes, int start, int finish){
-        ByteBuffer buffer = ByteBuffer.allocate(2);
-        buffer.order(ByteOrder.nativeOrder());
-
         float[] result = new float[3];
         for(int i = start, j = 0; i < finish; i += 2, j++){
-            buffer.put(readBytes[i]);
-            buffer.put(readBytes[i+1]);
-            buffer = ByteBuffer.allocate(2);
-            result[j] = buffer.getShort(0);
+            result[j] = (short)((readBytes[i+1] << 8) + readBytes[i]);
+        }
+        return result;
+    }
+
+    private float[] parseAccDate(byte[] readBytes)
+    {
+        float[] result = new float[3];
+        for(int i = 10, j = 0 ; i < 15; i++){
+            result[j] = ((short) ((readBytes[i+1] << 8) + readBytes[i])) / 256 * 9.8f;
+        }
+        return result;
+    }
+
+    private float[] parseAngles(byte[] readBytes){
+
+        float[] result = new float[3];
+        for(int i = 22, j = 0 ; i < 27; i++){
+            result[j] = ((short) ((readBytes[i+1] << 8) + readBytes[i])) / 100;
         }
         return result;
     }

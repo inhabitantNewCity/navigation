@@ -1,7 +1,6 @@
 package com.example.vlad.navigation.connection.localSensors;
 
-import com.example.vlad.navigation.lenghtStep.ExecutorAlgorithm;
-import com.example.vlad.navigation.lenghtStep.alphaBettaAlgorithm.CounterAlphaBetta;
+import com.example.vlad.navigation.calculation.inertialSystem.ExecutorAlgorithm;
 import com.example.vlad.navigation.utils.messageSystem.MessageCounter;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 

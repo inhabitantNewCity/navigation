@@ -1,11 +1,7 @@
 package com.example.vlad.navigation;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,8 +11,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.vlad.navigation.grafics.defineLocationSystems.dialogSystem.DialogSystemActivity;
-import com.example.vlad.navigation.grafics.defineLocationSystems.pointOnMapSystem.PointOnMapActivity;
+import com.example.vlad.navigation.ui.defineLocationSystems.dialogSystem.DialogSystemActivity;
+import com.example.vlad.navigation.ui.defineLocationSystems.pointOnMapSystem.PointOnMapActivity;
 
 public class MainActivity extends AppCompatActivity {
     BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();

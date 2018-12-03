@@ -37,21 +37,21 @@ public class ConnectionBluetooth implements Connection {
         if(bluetooth != null){
             if (bluetooth.isEnabled()) {
 
-                BluetoothDevice device = new BluetoothDeviceImpl(bluetooth);
-                socket = device.getSocket();
-                //byte[] pin = {1,2,3,4};
-                //Set<android.bluetooth.BluetoothDevice> pairedDevices = bluetooth.getBondedDevices();
-                //if(!pairedDevices.isEmpty()){
-                  //  for(android.bluetooth.BluetoothDevice device : pairedDevices){
-                    //    String tmp = device.getName();
-                      //  Method mPin = device.getClass().getMethod("setPin", byte[].class);
-                        //mPin.invoke(device, pin);
-                        //Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
-                        //socket = (BluetoothSocket) m.invoke(device, 1);
+                //BluetoothDevice device = new BluetoothDeviceImpl(bluetooth);
+                //socket = device.getSocket();
+                byte[] pin = {1,2,3,4};
+                Set<android.bluetooth.BluetoothDevice> pairedDevices = bluetooth.getBondedDevices();
+                if(!pairedDevices.isEmpty()){
+                    for(android.bluetooth.BluetoothDevice device : pairedDevices) {
+                        String tmp = device.getName();
+                        Method mPin = device.getClass().getMethod("setPin", byte[].class);
+                        mPin.invoke(device, pin);
+                        Method m = device.getClass().getMethod("createRfcommSocket", new Class[]{int.class});
+                        socket = (BluetoothSocket) m.invoke(device, 1);
                         //socket = device.createRfcommSocketToServiceRecord(UUID.randomUUID());
-                  //  }
-                //}
-                    socket.connect();
+                    }
+                }
+                socket.connect();
 
                     input = socket.getInputStream();
                     out = socket.getOutputStream();
