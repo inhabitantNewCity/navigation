@@ -5,12 +5,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
+import com.example.vlad.navigation.database.DataAccessService;
+import com.example.vlad.navigation.database.DataAccessServiceStub;
 import com.example.vlad.navigation.utils.Point;
 import com.example.vlad.navigation.utils.Vector;
 import com.example.vlad.navigation.utils.messageSystem.MessageDrawer;
 import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import math.geom2d.line.Line2D;
 
 /**
  * Created by Tmp on 14.02.2016.
@@ -21,7 +26,9 @@ public class DrawerChanges implements Runnable {
 
     private static Object lock = new Object();
     private boolean flagParity = false;
-
+    private DataAccessService dataService = new DataAccessServiceStub();
+    private Paint penMap = new Paint();
+    private Paint penWay = new Paint();
 
     private Canvas canvas;
     private SurfaceHolder builderSpaceForDraw;
@@ -30,11 +37,14 @@ public class DrawerChanges implements Runnable {
     private Point finish = new Point();
 
     public DrawerChanges(SurfaceHolder builder){
+        penMap.setColor(Color.RED);
+        penWay.setColor(Color.YELLOW);
         builderSpaceForDraw = builder;
     }
     @Override
     public void run() {
         setInitialisationParameters();
+        drawLines();
         while(true){
             if(!myQueue.isEmpty()){
                 MessageDrawer ms = (MessageDrawer) myQueue.poll();
@@ -48,6 +58,30 @@ public class DrawerChanges implements Runnable {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void drawLines() {
+        canvas = builderSpaceForDraw.lockCanvas();
+        List<Line2D> linesMap = dataService.getMap().getList();
+        List<Line2D> linesWay = dataService.getWay().getList();
+        try {
+            synchronized (builderSpaceForDraw) {
+                for(Line2D line: linesMap) {
+                    canvas.drawLine((float) line.getX1(), (float) line.getY1(), (float) line.getX2(), (float) line.getY2(), penMap);
+                }
+                for(Line2D line: linesWay) {
+                    canvas.drawLine((float) line.getX1(), (float) line.getY1(), (float) line.getX2(), (float) line.getY2(), penWay);
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            if(canvas != null){
+                builderSpaceForDraw.unlockCanvasAndPost(canvas);
             }
         }
     }
