@@ -27,7 +27,7 @@ public class DrawerChanges implements Runnable {
 
     private static Object lock = new Object();
     private boolean flagParity = false;
-    private DataAccessService dataService = new DataAccessServiceRest();
+    private DataAccessService dataService = new DataAccessServiceStub();
     private Paint penMap = new Paint();
     private Paint penWay = new Paint();
 
