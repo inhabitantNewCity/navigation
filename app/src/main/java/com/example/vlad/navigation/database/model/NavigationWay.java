@@ -26,13 +26,6 @@ public class NavigationWay extends NavigationMap {
     }
 
     public Line2D getNext(List<Line2D> neboures) {
-        //FOR_TEXT
-        //Line^ line = gcnew Line();
-        //line->X1 = 1;
-        //line->Y1 = 5;
-        //line->X2 = 1;
-        //line->Y2 = 7;
-        //lines->Add(line);
 
         for (int i = 0; i < neboures.size(); i++) {
             for (int j = 0; j < lines.size(); j++) {

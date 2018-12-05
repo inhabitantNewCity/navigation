@@ -14,6 +14,17 @@ public class NavigationMap {
         this.lines = intervals;
     }
 
+    public static List<Line2D> convert(List<Line> intervals) {
+        List<Line2D> lines = new ArrayList<>();
+        for(Line line: intervals){
+            Point a = line.getA();
+            Point b = line.getB();
+            Line2D line2D = new Line2D(a.getX(), a.getY(), b.getX(), b.getY());
+            lines.add(line2D);
+        }
+        return lines;
+    }
+
     public List<Line2D> getRelatedEges(Line2D line) {
         List<Line2D> result = new ArrayList<Line2D>();
         for (int i = 0; i < lines.size(); i++) {
