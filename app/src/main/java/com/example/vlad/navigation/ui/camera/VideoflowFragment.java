@@ -66,12 +66,12 @@ public class VideoflowFragment extends Fragment {
     private final CameraDevice.StateCallback mStateCallback = new StateCallback(this);
     private final TextureView.SurfaceTextureListener mSurfaceTextureListener = new SurfaceTextureListener(this);
     public CameraCaptureSession.CaptureCallback mCaptureCallback = new CaptureCallback(this);
-    private ImageReader.OnImageAvailableListener mOnImageAvailableListener = new OnImageAvailableListener();
+    private ImageReader.OnImageAvailableListener mOnImageAvailableListener = new OnImageAvailableListener(this);
 
     private HandlerThread mBackgroundThread;
     public Handler mBackgroundHandler;
     private ImageReader mImageReader;
-    private File mFile;
+    public File mFile;
 
     public CaptureRequest.Builder mPreviewRequestBuilder;
     public CaptureRequest mPreviewRequest;
