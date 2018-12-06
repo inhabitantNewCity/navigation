@@ -2,4 +2,8 @@
     <string name="app_name">Navigation</string>
     <string name="action_settings">Settings</string>
     <string name="select_more_usable_way_for_you">Select more usable way for you</string>
+    <string name="title_activity_videoflow">Videoflow</string>
+    <string name="description_info">description</string>
+    <string name="picture">picture</string>
+    <string name="intro_message">constant</string>
 </resources>

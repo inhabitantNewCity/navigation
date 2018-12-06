@@ -38,4 +38,15 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:onClick="onClickDialog" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginBottom="165dp"
+        android:layout_toEndOf="@+id/buttonMap"
+        android:onClick="onClickVideoFlow" />
+        android:text="Video Flow" />
 </RelativeLayout>

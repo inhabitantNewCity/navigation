@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.vlad.navigation.ui.camera.Videoflow;
 import com.example.vlad.navigation.ui.defineLocationSystems.dialogSystem.DialogSystemActivity;
 import com.example.vlad.navigation.ui.defineLocationSystems.pointOnMapSystem.PointOnMapActivity;
 
@@ -63,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onClickDialog(View view){
         Intent intent = new Intent(this, DialogSystemActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickVideoFlow(View view){
+        Intent intent = new Intent(this, Videoflow.class);
         startActivity(intent);
     }
 }
