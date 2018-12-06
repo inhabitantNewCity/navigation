@@ -6,4 +6,5 @@
     <string name="description_info">description</string>
     <string name="picture">picture</string>
     <string name="intro_message">constant</string>
+    <string name="request_permission">Are you sure to allow camera api</string>
 </resources>

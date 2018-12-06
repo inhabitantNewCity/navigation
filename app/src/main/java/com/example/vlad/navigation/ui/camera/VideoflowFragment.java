@@ -2,6 +2,7 @@ package com.example.vlad.navigation.ui.camera;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -40,6 +41,7 @@ import com.example.vlad.navigation.ui.camera.listeners.StateCallback;
 import com.example.vlad.navigation.ui.camera.listeners.SurfaceTextureListener;
 import com.example.vlad.navigation.ui.camera.listeners.VideoListener;
 import com.example.vlad.navigation.utils.CompareSizesByArea;
+import com.example.vlad.navigation.utils.ConfirmationDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -131,7 +133,7 @@ public class VideoflowFragment extends Fragment {
     public void openCamera(int width, int height) {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            //requestCameraPermission();
+            requestCameraPermission();
             return;
         }
         setUpCameraOutputs(width, height);
@@ -467,6 +469,14 @@ public class VideoflowFragment extends Fragment {
             mBackgroundHandler = null;
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void requestCameraPermission() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+            new ConfirmationDialog().show(getChildFragmentManager(), FRAGMENT_DIALOG);
+        } else {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         }
     }
 }
