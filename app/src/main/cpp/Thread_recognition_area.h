@@ -1,10 +1,3 @@
-//
-// Created by vlan0416 on 18.12.2018.
-//
-
-#ifndef NAVIGATION_THREAD_RECOGNITION_AREA_H
-#define NAVIGATION_THREAD_RECOGNITION_AREA_H
-
 #include "Contour/TScene.h"
 #include "Contour/AutoRecognition.h"
 
@@ -33,6 +26,5 @@
 
     int buff_to_ppix(unsigned char *buff, int W_H0);
 
-    int Recognition_area(int w0, int h0);
+    int Recognition_area(unsigned char *buff, int w0,int h0) ;
 
-#endif //NAVIGATION_THREAD_RECOGNITION_AREA_H

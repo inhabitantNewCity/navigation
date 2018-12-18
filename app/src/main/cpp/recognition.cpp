@@ -2,28 +2,29 @@
 #include <jni.h>
 #include "Thread_recognition_area.h"
 
-JNIEXPORT jstring JNICALL
-Java_com_example_vlad_navigation_calculation_machineVisionSystem_RecognitionFacedJNI_recognizeFromJNI( JNIEnv* env,
-                                                  jobject thiz, jbyteArray  data )
-{
+
+JNIEXPORT jint JNICALL
+Java_com_example_vlad_navigation_calculation_machineVisionSystem_RecognitionFacedJNI_recognizeFromJNI(
+        JNIEnv *env,
+        jobject thiz, jbyteArray data, jint width, jint high) {
 #if defined(__arm__)
-    #if defined(__ARM_ARCH_7A__)
-    #if defined(__ARM_NEON__)
-      #if defined(__ARM_PCS_VFP)
-        #define ABI "armeabi-v7a/NEON (hard-float)"
-      #else
-        #define ABI "armeabi-v7a/NEON"
-      #endif
-    #else
-      #if defined(__ARM_PCS_VFP)
-        #define ABI "armeabi-v7a (hard-float)"
-      #else
-        #define ABI "armeabi-v7a"
-      #endif
-    #endif
-  #else
-   #define ABI "armeabi"
-  #endif
+#if defined(__ARM_ARCH_7A__)
+#if defined(__ARM_NEON__)
+#if defined(__ARM_PCS_VFP)
+#define ABI "armeabi-v7a/NEON (hard-float)"
+#else
+#define ABI "armeabi-v7a/NEON"
+#endif
+#else
+#if defined(__ARM_PCS_VFP)
+#define ABI "armeabi-v7a (hard-float)"
+#else
+#define ABI "armeabi-v7a"
+#endif
+#endif
+#else
+#define ABI "armeabi"
+#endif
 #elif defined(__i386__)
 #define ABI "x86"
 #elif defined(__x86_64__)
@@ -38,7 +39,10 @@ Java_com_example_vlad_navigation_calculation_machineVisionSystem_RecognitionFace
 #define ABI "unknown"
 #endif
     jboolean isCopy;
-    jbyte* cData = env->GetByteArrayElements(data, &isCopy);
+    jbyte *cData = env->GetByteArrayElements(data, &isCopy);
     env->ReleaseByteArrayElements(data, cData, JNI_ABORT);
-    return (env)->NewStringUTF("[{\"x\":0.0, \"y\":0.0},{\"x\":0.0, \"y\":0.0}]" ABI ".");
+    unsigned char *img = (unsigned char *) data;
+    int c_width = (int) width;
+    int c_high = (int) high;
+    return 1;//Recognition_area(img, c_width, c_high);
 }

@@ -2,8 +2,11 @@ package com.example.vlad.navigation.database;
 
 import com.example.vlad.navigation.database.model.NavigationMap;
 import com.example.vlad.navigation.database.model.NavigationWay;
+import com.example.vlad.navigation.database.model.Point;
+import com.example.vlad.navigation.database.model.Template;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import math.geom2d.line.Line2D;
@@ -33,5 +36,16 @@ public class DataAccessServiceStub implements DataAccessService {
             add(new Line2D(100,100,100,300));
         }};
         return new NavigationWay(linesMap);
+    }
+
+    @Override
+    public Template getTemplateById(int id) {
+        Template template = new Template();
+        template.setId(id);
+
+        List<Point> points = new LinkedList<>();
+        points.add(new Point());
+        template.setPoints(points);
+        return template;
     }
 }

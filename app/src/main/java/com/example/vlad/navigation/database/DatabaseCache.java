@@ -5,6 +5,7 @@ import com.example.vlad.navigation.database.model.Line;
 import com.example.vlad.navigation.database.model.NavigationMap;
 import com.example.vlad.navigation.database.model.NavigationWay;
 import com.example.vlad.navigation.database.model.Point;
+import com.example.vlad.navigation.database.model.Template;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public class DatabaseCache {
     private Map<String, NavigationMap> caches = new HashMap<>();
-    private DatabaseClient client = new DatabaseClient();
+    private DatabaseClient client = DatabaseClient.getInstance();
     private static DatabaseCache instance;
 
     private DatabaseCache(){};

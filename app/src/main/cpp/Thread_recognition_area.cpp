@@ -93,7 +93,7 @@ int buff_to_ppix(unsigned char *buff,int W_H0)
  }
 }
 //---------------------------------------------------------------------------
-int Recognition_area(int w0,int h0) // ,int rects_min_x,int rects_min_y, int rects_max_x,int rects_max_y
+int Recognition_area(unsigned char *buff, int w0,int h0) // ,int rects_min_x,int rects_min_y, int rects_max_x,int rects_max_y
 {
  int threshold = 0;
  double dt;
@@ -102,9 +102,9 @@ int Recognition_area(int w0,int h0) // ,int rects_min_x,int rects_min_y, int rec
 
  im7++;
  //-------------------------------------------------------------
- threshold = OtsuThreshold (ppix, W_H0);
+ threshold = OtsuThreshold (buff, W_H0);
 
- BinarizationImage (ppix, W_H0, threshold);
+ BinarizationImage (buff, W_H0, threshold);
 
 
   //-------------------------------------------------------------
@@ -112,7 +112,7 @@ int Recognition_area(int w0,int h0) // ,int rects_min_x,int rects_min_y, int rec
 
       TShtrihPicture *shtrpic = new TShtrihPicture (w0,h0);
 
-	  shtrpic->ConvertToShtrih (ppix);
+	  shtrpic->ConvertToShtrih (buff);
 
 	  FindListContour  (shtrpic, Scene);
         char NameFileEtalonScene[5];
