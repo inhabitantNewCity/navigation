@@ -27,7 +27,7 @@ public class MessageDrawer implements MessageSystem {
     }
 
 
-    public Object getPoint() {
+    public Point2D getPoint() {
         return resultMapCheck.getPoint2D();
     }
 
@@ -39,4 +39,7 @@ public class MessageDrawer implements MessageSystem {
         return resultMapCheck.isFinished();
     }
 
+    public Vector getVector() {
+        return vector;
+    }
 }

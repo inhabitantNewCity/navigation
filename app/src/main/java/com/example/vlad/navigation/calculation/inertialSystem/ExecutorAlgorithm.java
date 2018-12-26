@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.vlad.navigation.calculation.coleration.MapChecker;
 import com.example.vlad.navigation.calculation.coleration.ProbabilityMapChecker;
 import com.example.vlad.navigation.ui.DrawerChanges;
+import com.example.vlad.navigation.utils.messageSystem.MessageDrawer;
 import com.example.vlad.navigation.utils.messageSystem.ResultMapCheck;
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.ConnectionFactory;
@@ -53,8 +54,9 @@ public class ExecutorAlgorithm  implements Runnable {
                 HashMap<String,float[]> map = device.parse(stream);
                 Log.d(TAG, map.toString());
                 Vector sendVector = counter.run(map);
-                ResultMapCheck result = mapChecker.checkOnMap((float) sendVector.length, sendVector.z);
-                myQuery.add(result);
+                ResultMapCheck mappingResult = mapChecker.checkOnMap((float) sendVector.length, sendVector.z);
+                MessageDrawer drawerMessage = new MessageDrawer(sendVector, mappingResult);
+                myQuery.add(drawerMessage);
             }
         }catch (Exception e) {
             e.printStackTrace();

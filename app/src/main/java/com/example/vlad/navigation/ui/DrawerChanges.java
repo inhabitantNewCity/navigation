@@ -17,6 +17,7 @@ import com.example.vlad.navigation.utils.messageSystem.MessageSystem;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import math.geom2d.Point2D;
 import math.geom2d.line.Line2D;
 
 /**
@@ -50,8 +51,7 @@ public class DrawerChanges implements Runnable {
         while(true){
             if(!myQueue.isEmpty()){
                 MessageDrawer ms = (MessageDrawer) myQueue.poll();
-                Vector vectors = (Vector) ms.getMessage();
-                setOrientationLine(vectors);
+                setOrientationLine(ms);
                 drawChanges(canvas);
             }
             try {
@@ -122,6 +122,15 @@ public class DrawerChanges implements Runnable {
         finish.y = (float) (Math.cos(orientationVector.y) * (orientationVector.length) + start.y);
 
     }
+
+    private void setOrientationLine(MessageDrawer message){
+        //use matrix angle
+
+        finish.x = (float) (-Math.sin(message.getPoint().x()) * (message.getVector().length) + start.x);
+        finish.y = (float) (Math.cos(message.getPoint().y()) * (message.getVector().length) + start.y);
+
+    }
+
     public static ConcurrentLinkedQueue<MessageSystem> getQueue() {
         return myQueue;
     }
