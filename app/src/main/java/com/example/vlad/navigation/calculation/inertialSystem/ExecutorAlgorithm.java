@@ -2,6 +2,7 @@ package com.example.vlad.navigation.calculation.inertialSystem;
 
 import android.content.Context;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 import com.example.vlad.navigation.calculation.coleration.MapChecker;
 import com.example.vlad.navigation.calculation.coleration.ProbabilityMapChecker;
@@ -30,6 +31,7 @@ public class ExecutorAlgorithm  implements Runnable {
     private SensorManager manager;
     private MapChecker mapChecker;
     private DataAccessService dataAccessService = new DataAccessServiceStub();
+    private final static String TAG = "PNS";
 
     private Context context;
 
@@ -48,6 +50,7 @@ public class ExecutorAlgorithm  implements Runnable {
             InputOutputStream stream = connection.runReadDate();
             while (true){
                 HashMap<String,float[]> map = device.parse(stream);
+                Log.d(TAG, map.toString());
                 Vector sendVector = counter.run(map);
                 ResultMapCheck result = mapChecker.checkOnMap((float) sendVector.length, sendVector.z);
                 myQuery.add(result);

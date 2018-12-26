@@ -6,6 +6,7 @@ import com.example.vlad.navigation.utils.norming.DefoultNorm;
 import com.example.vlad.navigation.utils.norming.Norm;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import static  com.example.vlad.navigation.utils.Constants.*;
 /**
