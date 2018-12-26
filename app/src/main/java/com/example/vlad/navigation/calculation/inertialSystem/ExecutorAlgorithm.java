@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.vlad.navigation.calculation.coleration.MapChecker;
 import com.example.vlad.navigation.calculation.coleration.ProbabilityMapChecker;
+import com.example.vlad.navigation.ui.DrawerChanges;
 import com.example.vlad.navigation.utils.messageSystem.ResultMapCheck;
 import com.example.vlad.navigation.connection.Connection;
 import com.example.vlad.navigation.connection.ConnectionFactory;
@@ -25,7 +26,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class ExecutorAlgorithm  implements Runnable {
     private Connection connection;
 
-    private static ConcurrentLinkedQueue<MessageSystem> myQuery = new ConcurrentLinkedQueue<>();
+    private static ConcurrentLinkedQueue<MessageSystem> myQuery = DrawerChanges.getQueue();
 
     private Device device;
     private SensorManager manager;

@@ -26,4 +26,16 @@ public class ResultMapCheck implements MessageSystem {
     public Object getMessage() {
         return this;
     }
+
+    public Point2D getPoint2D() {
+        return point2D;
+    }
+
+    public boolean isUpdated() {
+        return isUpdated;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
 }
